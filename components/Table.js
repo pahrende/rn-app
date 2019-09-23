@@ -11,14 +11,11 @@ import {
 
 export default class Table extends React.Component {
 
-//     <View style={{ flex: 1, alignSelf: 'stretch' }} >
-//     <Text>Hello</Text>    
-// </View>/> { /* Edit these as they are your cells. You may even take parameters to display different data / react elements etc. */}
-// <View style={{ flex: 1, alignSelf: 'stretch' }} />
-
     renderRow(datum, index){
         return(
             <View key={index} style={styles.tableRow}>
+            {console.log(datum)
+            <console.log(index)}
                 <View style={styles.tableCell}><Text>{datum[0]}</Text></View>
                 <View style={styles.tableCell}><Text>{datum[1]}</Text></View>
             </View>
@@ -28,7 +25,6 @@ export default class Table extends React.Component {
     render(){
         const header = this.props.dataHeader;
         const data = this.props.dataSource;
-        
         return (
             <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
@@ -40,27 +36,16 @@ export default class Table extends React.Component {
                     data.map((entry, index) => {
                         return this.renderRow(entry, index);
                     })
-                }
-                </View>
+                }</View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    getStartedText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
-      textAlign: 'center',
-    },
-    tableContainer:{ flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#f1f8ff' },
-    text: { margin: 6 },
-    dataRow: { height: 30 },
-    border: { borderWidth: 0.5, borderColor: "#c8e1ff" },
-    table: { marginTop: 10, marginBottom: 10 },
-    tableRow:{ flex: 1, alignSelf: 'stretch', flexDirection: 'row' },
-    tableCell: { flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center'}
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff" },
+    text: { margin: 100 },
+    tableRow:{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
+    tableCell: { flex: 1, alignSelf: 'stretch', margin : 50}
   });
   

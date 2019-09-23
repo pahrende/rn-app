@@ -11,7 +11,6 @@ import {
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 import Table from '../components/Table';
 
 
@@ -56,7 +55,6 @@ export default class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer} />
 
           <View style={styles.getStartedContainer}>
             
@@ -64,7 +62,7 @@ export default class HomeScreen extends React.Component {
               title="Get Pool Stats"
               onPress={() => this.getDataUsingGet()}
             />
-            <Table style={styles.tableContainer} dataHeader={tableHeader} dataSource={poolStatsTemp}/>
+            <Table dataHeader={tableHeader} dataSource={poolStatsTemp}/>
           </View>
         </ScrollView>
       </View>
@@ -93,36 +91,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    paddingTop: 50,
   },
   getStartedContainer: {
+    flex:1,
     alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tableContainer:{ flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { margin: 6 },
-  dataRow: { height: 30 },
-  border: { borderWidth: 0.5, borderColor: "#c8e1ff" },
-  table: { marginTop: 10, marginBottom: 10 },
-  tableCell: { flex: 1, alignItems: 'center', justifyContent: 'center'}
+    borderWidth: 0.5, 
+    borderColor: "#c8e1ff" 
+  }
 });
