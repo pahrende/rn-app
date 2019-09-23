@@ -31,7 +31,7 @@ export default class Table extends React.Component {
                     <View style={styles.tableCell}><Text>{header[0]}</Text></View>
                     <View style={styles.tableCell}><Text>{header[1]}</Text></View>
                 </View>
-                <View style={styles.text}>
+                <View style={styles.tableContainer}>
                 {
                     data.map((entry, index) => {
                         return this.renderRow(entry, index);
@@ -43,9 +43,8 @@ export default class Table extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff" },
-    text: { margin: 100 },
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff", minWidth: 280 },
     tableRow:{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
-    tableCell: { flex: 1, alignSelf: 'stretch', margin : 50}
+    tableCell: { flex: 1, alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff"}
   });
   

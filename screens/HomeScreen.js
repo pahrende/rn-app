@@ -62,7 +62,7 @@ export default class HomeScreen extends React.Component {
               title="Get Pool Stats"
               onPress={() => this.getDataUsingGet()}
             />
-            <Table dataHeader={tableHeader} dataSource={poolStatsTemp}/>
+            <Table dataHeader={tableHeader} dataSource={poolStats}/>
           </View>
         </ScrollView>
       </View>
