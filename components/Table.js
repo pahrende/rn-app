@@ -31,19 +31,18 @@ export default class Table extends React.Component {
                     <View style={styles.tableCell}><Text>{header[0]}</Text></View>
                     <View style={styles.tableCell}><Text>{header[1]}</Text></View>
                 </View>
-                <View style={styles.tableContainer}>
                 {
                     data.map((entry, index) => {
                         return this.renderRow(entry, index);
                     })
-                }</View>
+                }
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff", minWidth: 280 },
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff" },
     tableRow:{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
     tableCell: { flex: 1, alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff"}
   });

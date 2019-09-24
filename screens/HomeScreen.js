@@ -59,6 +59,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>
             
             <Button
+              style={{ alignItems: 'center'}}
               title="Get Pool Stats"
               onPress={() => this.getDataUsingGet()}
             />
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
   },
   getStartedContainer: {
     flex:1,
-    alignItems: 'center',
     borderWidth: 0.5, 
     borderColor: "#c8e1ff" 
   }
