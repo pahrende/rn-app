@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import Table from '../components/Table';
+import Constants from 'expo-constants';
 
 
 export default class HomeScreen extends React.Component {
@@ -63,7 +64,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>            
             <Table dataHeader={tableHeader} dataSource={poolStats}/>
             <Button
-              style={{flex:1, padding: 50}}
+              style={{flex:1, padding: 50, minWidth: 120}}
               title="Get Pool Stats"
               onPress={() => this.getPoolDataUsingGet()}
             />
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 50,
+    marginTop: Constants.statusBarHeight,
   },
   getStartedContainer: {
     flex:1,
