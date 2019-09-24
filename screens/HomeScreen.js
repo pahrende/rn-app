@@ -18,7 +18,8 @@ export default class HomeScreen extends React.Component {
   state = {
     poolStats: [],
   };
-  getDataUsingGet() {
+
+  getPoolDataUsingGet() {
     //GET request
     callApi('pool/stats')
       .then(responseJson => {
@@ -38,32 +39,34 @@ export default class HomeScreen extends React.Component {
       });
   }
 
+  componentDidMount(){
+    this.getPoolDataUsingGet();
+  }
+
   render() {
     const poolStats = this.state.poolStats;
 
-    const tableHeader = ['Stat', 'Data'];
+    const tableHeader = ['STAT', 'DATA'];
     const poolStatsTemp = [
       ['Hello','1'],
       ['Goodbye','3']
     ];
 
-    console.log(poolStats);
-    console.log(tableHeader);
-            //
+    //console.log(poolStats);
+    
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
 
-          <View style={styles.getStartedContainer}>
-            
-            <Button
-              style={{ alignItems: 'center'}}
-              title="Get Pool Stats"
-              onPress={() => this.getDataUsingGet()}
-            />
+          <View style={styles.getStartedContainer}>            
             <Table dataHeader={tableHeader} dataSource={poolStats}/>
+            <Button
+              style={{flex:1, padding: 50}}
+              title="Get Pool Stats"
+              onPress={() => this.getPoolDataUsingGet()}
+            />
           </View>
         </ScrollView>
       </View>
@@ -96,7 +99,5 @@ const styles = StyleSheet.create({
   },
   getStartedContainer: {
     flex:1,
-    borderWidth: 0.5, 
-    borderColor: "#c8e1ff" 
   }
 });

@@ -14,8 +14,6 @@ export default class Table extends React.Component {
     renderRow(datum, index){
         return(
             <View key={index} style={styles.tableRow}>
-            {console.log(datum)
-            <console.log(index)}
                 <View style={styles.tableCell}><Text>{datum[0]}</Text></View>
                 <View style={styles.tableCell}><Text>{datum[1]}</Text></View>
             </View>
@@ -28,8 +26,8 @@ export default class Table extends React.Component {
         return (
             <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
-                    <View style={styles.tableCell}><Text>{header[0]}</Text></View>
-                    <View style={styles.tableCell}><Text>{header[1]}</Text></View>
+                    <View style={styles.tableCell}><Text style={styles.headerText}>{header[0]}</Text></View>
+                    <View style={styles.tableCell}><Text style={styles.headerText}>{header[1]}</Text></View>
                 </View>
                 {
                     data.map((entry, index) => {
@@ -42,8 +40,9 @@ export default class Table extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center',paddingTop: 30, borderWidth: 0.5, borderColor: "#c8e1ff" },
+    headerText: { fontWeight: 'bold', fontSize: 16},
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center', padding: 50, paddingTop: 30 },
     tableRow:{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
-    tableCell: { flex: 1, alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff"}
+    tableCell: { flex: 1, alignSelf: 'center', borderWidth: 0.5, borderColor: "#c8e1ff"}
   });
   
