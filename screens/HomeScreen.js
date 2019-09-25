@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   Image,
@@ -17,17 +16,19 @@ import Constants from 'expo-constants';
 
 export default class HomeScreen extends React.Component {
   state = {
+    poolApiUrl: 'http://www.supportxmr.com/api/',
     poolStats: [],
   };
 
-  getPoolDataUsingGet() {
+  getMinerDataUsingGet() {
     //GET request
-    callApi('pool/stats')
+    const poolUrl = this.state.poolApiUrl;
+    callApi(poolUrl, 'miner/4A6zDXohCGTX2h8HGeGCD6j2FeusrGzV3eoKHPnFurNLRdmzEUf66WSHB72EfeUMqjYqBvMEn3z2HbWJ3VJYsxM3N5X6waa/stats')
       .then(responseJson => {
         //Success
         //alert(JSON.stringify().stringify(responseJson));
         //console.log(responseJson);
-        const respArray = (Object.entries(responseJson.pool_statistics));
+        const respArray = (Object.entries(responseJson));
         this.setState({
           poolStats: respArray,
         });
@@ -41,7 +42,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    this.getPoolDataUsingGet();
+    this.getMinerDataUsingGet();
   }
 
   render() {
@@ -65,8 +66,8 @@ export default class HomeScreen extends React.Component {
             <Table dataHeader={tableHeader} dataSource={poolStats}/>
             <Button
               style={{flex:1, padding: 50, minWidth: 120}}
-              title="Get Pool Stats"
-              onPress={() => this.getPoolDataUsingGet()}
+              title="Get Miner Stats"
+              onPress={() => this.getMinerDataUsingGet()}
             />
           </View>
         </ScrollView>
@@ -75,8 +76,8 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-async function callApi(endpoint) {
-  const response = await fetch('http://www.supportxmr.com/api/' + endpoint, {
+async function callApi(url, endpoint) {
+  const response = await fetch(url + endpoint, {
     method: 'GET',
   });
   const body = await response.json();
