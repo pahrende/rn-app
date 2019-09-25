@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import MinerScreen from '../screens/MinerScreen';
 import PoolScreen from '../screens/PoolScreen';
-import StatusScreen from '../screens/StatusScreen';
+import TodoScreen from '../screens/TodoScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -34,21 +34,21 @@ MinerStack.navigationOptions = {
 
 MinerStack.path = '';
 
-const StatusStack = createStackNavigator(
+const TodoStack = createStackNavigator(
   {
-    Status: StatusScreen,
+    Todo: TodoScreen,
   },
   config
 );
 
-StatusStack.navigationOptions = {
+TodoStack.navigationOptions = {
   tabBarLabel: 'To-Do',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused = {focused} name={Platform.OS === 'ios' ? 'ios-list' : 'md-list'} />
   ),
 };
 
-StatusStack.path = '';
+TodoStack.path = '';
 
 const PoolStack = createStackNavigator(
   {
@@ -85,7 +85,7 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   MinerStack,
   PoolStack,
-  StatusStack,
+  TodoStack,
   SettingsStack,
 });
 

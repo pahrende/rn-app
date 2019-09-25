@@ -12,7 +12,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-export default class StatusScreen extends React.Component {
+export default class TodoScreen extends React.Component {
 
   state = {
     inputValue: '',
@@ -92,7 +92,7 @@ export default class StatusScreen extends React.Component {
   }
 }
 
-StatusScreen.navigationOptions = {
+TodoScreen.navigationOptions = {
   header: null,
 };
 
