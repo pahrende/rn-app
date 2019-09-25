@@ -19,10 +19,56 @@ export default class MinerScreen extends React.Component {
     poolApiUrl: 'http://www.supportxmr.com/api/',
     minerAddr: '4A6zDXohCGTX2h8HGeGCD6j2FeusrGzV3eoKHPnFurNLRdmzEUf66WSHB72EfeUMqjYqBvMEn3z2HbWJ3VJYsxM3N5X6waa',
     minerStats: [],
+    minerIdentifiers: [],
+    minerPayments: [],
   };
 
+  getPayments(){
+    const poolUrl = this.state.poolApiUrl;
+    const minerAddr = this.state.minerAddr;
+    callApi(poolUrl, 'miner/' + minerAddr + '/payments')
+      .then(responseJson => {
+        //Success
+        //alert(JSON.stringify().stringify(responseJson));
+        console.log(responseJson);
+        const respArray = (Object.entries(responseJson[0]));
+
+        //console.log(respArray);
+
+        this.setState({
+          minerPayments: respArray,
+        });
+      })
+      //If response is not in json then in error
+      .catch(error => {
+        //Error
+        alert(JSON.stringify(error));
+        console.error(error);
+      });
+  }
+
+  getMinerIdentifiers(){
+    const poolUrl = this.state.poolApiUrl;
+    const minerAddr = this.state.minerAddr;
+    callApi(poolUrl, 'miner/' + minerAddr + '/identifiers')
+      .then(responseJson => {
+        //Success
+        //alert(JSON.stringify().stringify(responseJson));
+        //console.log(responseJson);
+        const respArray = (Object.entries(responseJson));
+        this.setState({
+          minerIdentifiers: respArray,
+        });
+      })
+      //If response is not in json then in error
+      .catch(error => {
+        //Error
+        alert(JSON.stringify(error));
+        console.error(error);
+      });
+  }
+
   getMinerStats() {
-    //GET request
     const poolUrl = this.state.poolApiUrl;
     const minerAddr = this.state.minerAddr;
     callApi(poolUrl, 'miner/' + minerAddr + '/stats')
@@ -45,12 +91,17 @@ export default class MinerScreen extends React.Component {
 
   componentDidMount(){
     this.getMinerStats();
+    this.getMinerIdentifiers();
+    this.getPayments();
   }
 
   render() {
     const minerStats = this.state.minerStats;
+    const minerIdentifiers = this.state.minerIdentifiers;
+    const minerPayments = this.state.minerPayments;
 
-    const tableHeader = ['STAT', 'DATA'];
+    const statHeader = ['STAT', 'DATA'];
+    const idHeader = ['ID', 'NAME']
     const minerStatsTemp = [
       ['Hello','1'],
       ['Goodbye','3']
@@ -65,9 +116,11 @@ export default class MinerScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
 
           <View style={styles.getStartedContainer}>            
-            <Table dataHeader={tableHeader} dataSource={minerStats}/>
+            <Table dataHeader={statHeader} dataSource={minerStats}/>
+            <Table dataHeader={idHeader} dataSource={minerIdentifiers}/>
+            <Table dataHeader={statHeader} dataSource={minerPayments}/>
             <Button
-              style={{flex:1, padding: 50, minWidth: 120}}
+              style={{flex:1}}
               title="Update Stats"
               onPress={() => this.getMinerStats()}
             />
@@ -103,5 +156,6 @@ const styles = StyleSheet.create({
   },
   getStartedContainer: {
     flex:1,
+    marginBottom: 29
   }
 });

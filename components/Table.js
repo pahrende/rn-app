@@ -41,7 +41,7 @@ export default class Table extends React.Component {
 
 const styles = StyleSheet.create({
     headerText: { fontWeight: 'bold', fontSize: 16},
-    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center', padding: 50, paddingTop: 30 },
+    tableContainer:{ flex: 1, alignItems:'center', justifyContent: 'center', padding: 50, paddingTop: 5 },
     tableRow:{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', borderWidth: 0.5, borderColor: "#c8e1ff" },
     tableCell: { flex: 1, alignSelf: 'center', borderWidth: 0.5, borderColor: "#c8e1ff"}
   });
