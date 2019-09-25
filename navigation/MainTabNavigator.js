@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import MinerScreen from '../screens/MinerScreen';
+import PoolScreen from '../screens/PoolScreen';
 import StatusScreen from '../screens/StatusScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
@@ -13,28 +13,26 @@ const config = Platform.select({
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const MinerStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Miner: MinerScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
+MinerStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+        Platform.OS === 'ios' ? 'ios-stats' : 'md-stats'
       }
     />
   ),
 };
 
-HomeStack.path = '';
+MinerStack.path = '';
 
 const StatusStack = createStackNavigator(
   {
@@ -44,29 +42,29 @@ const StatusStack = createStackNavigator(
 );
 
 StatusStack.navigationOptions = {
-  tabBarLabel: 'Status',
+  tabBarLabel: 'To-Do',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused = {focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused = {focused} name={Platform.OS === 'ios' ? 'ios-list' : 'md-list'} />
   ),
 };
 
 StatusStack.path = '';
 
-const LinksStack = createStackNavigator(
+const PoolStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Pool: PoolScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+PoolStack.navigationOptions = {
+  tabBarLabel: 'Pool',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-water' : 'md-water'} />
   ),
 };
 
-LinksStack.path = '';
+PoolStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -85,8 +83,8 @@ SettingsStack.navigationOptions = {
 SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
+  MinerStack,
+  PoolStack,
   StatusStack,
   SettingsStack,
 });

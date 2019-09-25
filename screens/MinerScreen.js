@@ -1,25 +1,38 @@
 import React from 'react';
-import { Button, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Image,
+  Platform,
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
 import Table from '../components/Table';
 import Constants from 'expo-constants';
 
-export default class LinksScreen extends React.Component {
+
+export default class MinerScreen extends React.Component {
   state = {
     poolApiUrl: 'http://www.supportxmr.com/api/',
-    poolStats: [],
+    minerAddr: '4A6zDXohCGTX2h8HGeGCD6j2FeusrGzV3eoKHPnFurNLRdmzEUf66WSHB72EfeUMqjYqBvMEn3z2HbWJ3VJYsxM3N5X6waa',
+    minerStats: [],
   };
 
-  getPoolDataUsingGet() {
+  getMinerStats() {
     //GET request
     const poolUrl = this.state.poolApiUrl;
-    callApi(poolUrl, 'pool/stats')
+    const minerAddr = this.state.minerAddr;
+    callApi(poolUrl, 'miner/' + minerAddr + '/stats')
       .then(responseJson => {
         //Success
         //alert(JSON.stringify().stringify(responseJson));
         //console.log(responseJson);
-        const respArray = (Object.entries(responseJson.pool_statistics));
+        const respArray = (Object.entries(responseJson));
         this.setState({
-          poolStats: respArray,
+          minerStats: respArray,
         });
       })
       //If response is not in json then in error
@@ -31,19 +44,19 @@ export default class LinksScreen extends React.Component {
   }
 
   componentDidMount(){
-    this.getPoolDataUsingGet();
+    this.getMinerStats();
   }
 
   render() {
-    const poolStats = this.state.poolStats;
+    const minerStats = this.state.minerStats;
 
     const tableHeader = ['STAT', 'DATA'];
-    const poolStatsTemp = [
+    const minerStatsTemp = [
       ['Hello','1'],
       ['Goodbye','3']
     ];
 
-    //console.log(poolStats);
+    //console.log(minerStats);
     
     return (
       <View style={styles.container}>
@@ -52,18 +65,17 @@ export default class LinksScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
 
           <View style={styles.getStartedContainer}>            
-            <Table dataHeader={tableHeader} dataSource={poolStats}/>
+            <Table dataHeader={tableHeader} dataSource={minerStats}/>
             <Button
               style={{flex:1, padding: 50, minWidth: 120}}
               title="Update Stats"
-              onPress={() => this.getPoolDataUsingGet()}
+              onPress={() => this.getMinerStats()}
             />
           </View>
         </ScrollView>
       </View>
     );
   }
-   
 }
 
 async function callApi(url, endpoint) {
@@ -77,8 +89,8 @@ async function callApi(url, endpoint) {
   return body;
 }
 
-LinksScreen.navigationOptions = {
-  title: 'Pool Stats',
+MinerScreen.navigationOptions = {
+  title: 'Miner Stats'
 };
 
 const styles = StyleSheet.create({

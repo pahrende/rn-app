@@ -1,34 +1,23 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  Button,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
+import { Button, ScrollView, StyleSheet, View } from 'react-native';
 import Table from '../components/Table';
 import Constants from 'expo-constants';
 
-
-export default class HomeScreen extends React.Component {
+export default class PoolScreen extends React.Component {
   state = {
     poolApiUrl: 'http://www.supportxmr.com/api/',
     poolStats: [],
   };
 
-  getMinerDataUsingGet() {
+  getPoolStats() {
     //GET request
     const poolUrl = this.state.poolApiUrl;
-    callApi(poolUrl, 'miner/4A6zDXohCGTX2h8HGeGCD6j2FeusrGzV3eoKHPnFurNLRdmzEUf66WSHB72EfeUMqjYqBvMEn3z2HbWJ3VJYsxM3N5X6waa/stats')
+    callApi(poolUrl, 'pool/stats')
       .then(responseJson => {
         //Success
         //alert(JSON.stringify().stringify(responseJson));
         //console.log(responseJson);
-        const respArray = (Object.entries(responseJson));
+        const respArray = (Object.entries(responseJson.pool_statistics));
         this.setState({
           poolStats: respArray,
         });
@@ -42,7 +31,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount(){
-    this.getMinerDataUsingGet();
+    this.getPoolStats();
   }
 
   render() {
@@ -66,14 +55,15 @@ export default class HomeScreen extends React.Component {
             <Table dataHeader={tableHeader} dataSource={poolStats}/>
             <Button
               style={{flex:1, padding: 50, minWidth: 120}}
-              title="Get Miner Stats"
-              onPress={() => this.getMinerDataUsingGet()}
+              title="Update Stats"
+              onPress={() => this.getPoolStats()}
             />
           </View>
         </ScrollView>
       </View>
     );
   }
+   
 }
 
 async function callApi(url, endpoint) {
@@ -87,8 +77,8 @@ async function callApi(url, endpoint) {
   return body;
 }
 
-HomeScreen.navigationOptions = {
-  header: null,
+PoolScreen.navigationOptions = {
+  title: 'Pool Stats',
 };
 
 const styles = StyleSheet.create({
