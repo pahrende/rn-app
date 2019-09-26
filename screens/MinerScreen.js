@@ -30,10 +30,11 @@ export default class MinerScreen extends React.Component {
       .then(responseJson => {
         //Success
         //alert(JSON.stringify().stringify(responseJson));
-        console.log(responseJson);
-        const respArray = (Object.entries(responseJson[0]));
-
-        //console.log(respArray);
+        //console.log(responseJson);
+        const respArray = []
+        responseJson.forEach(function(entry){
+          respArray.push(Object.entries(entry))
+        });
 
         this.setState({
           minerPayments: respArray,
@@ -100,8 +101,9 @@ export default class MinerScreen extends React.Component {
     const minerIdentifiers = this.state.minerIdentifiers;
     const minerPayments = this.state.minerPayments;
 
-    const statHeader = ['STAT', 'DATA'];
-    const idHeader = ['ID', 'NAME']
+    const minerGlobalHeader = ['GLOBAL', 'DATA'];
+    const statHeader = ['PAYMENT', 'DATA'];
+    const idHeader = ['RIG ID', 'NAME'];
     const minerStatsTemp = [
       ['Hello','1'],
       ['Goodbye','3']
@@ -116,14 +118,20 @@ export default class MinerScreen extends React.Component {
           contentContainerStyle={styles.contentContainer}>
 
           <View style={styles.getStartedContainer}>            
-            <Table dataHeader={statHeader} dataSource={minerStats}/>
-            <Table dataHeader={idHeader} dataSource={minerIdentifiers}/>
-            <Table dataHeader={statHeader} dataSource={minerPayments}/>
+            <Table dataHeader={minerGlobalHeader} dataSource={minerStats}/>
             <Button
-              style={{flex:1}}
+              style={{flex:1, marginBottom: 20}}
               title="Update Stats"
               onPress={() => this.getMinerStats()}
             />
+            <Table dataHeader={idHeader} dataSource={minerIdentifiers}/>
+            {
+              minerPayments.map((entry, index) => {
+                return (
+                  <Table key={index} dataHeader={statHeader} dataSource={entry}/>
+                )
+              })
+            }
           </View>
         </ScrollView>
       </View>
